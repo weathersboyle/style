@@ -1,4 +1,4 @@
-package com.intrepid.styleable;
+package com.intrepid.style;
 
 import javax.lang.model.element.Element;
 

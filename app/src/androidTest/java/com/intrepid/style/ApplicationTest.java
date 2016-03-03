@@ -1,4 +1,4 @@
-package com.intrepid.styleable;
+package com.intrepid.style;
 
 import android.app.Application;
 import android.test.ApplicationTestCase;

@@ -1,4 +1,4 @@
-package com.intrepid.styleable;
+package com.intrepid.style;
 
 import com.google.auto.service.AutoService;
 
@@ -17,7 +17,7 @@ import javax.lang.model.element.TypeElement;
 import javax.tools.Diagnostic;
 
 @AutoService(Processor.class)
-public class StyleableProcessor extends AbstractProcessor {
+public class StyleProcessor extends AbstractProcessor {
     private Messager messager;
 
     @Override
@@ -30,10 +30,10 @@ public class StyleableProcessor extends AbstractProcessor {
     @Override
     public boolean process(Set<? extends TypeElement> annotations, RoundEnvironment roundEnv) {
         try {
-            for (Element annotatedElement : roundEnv.getElementsAnnotatedWith(Styleable.class)) {
+            for (Element annotatedElement : roundEnv.getElementsAnnotatedWith(Style.class)) {
                 if (annotatedElement.getKind() != ElementKind.FIELD) {
                     throw new ProcessingException(annotatedElement, "Only fields can be annotated with @%s",
-                            Styleable.class.getSimpleName());
+                            Style.class.getSimpleName());
                 }
             }
         } catch (ProcessingException e) {
@@ -45,7 +45,7 @@ public class StyleableProcessor extends AbstractProcessor {
     @Override
     public Set<String> getSupportedAnnotationTypes() {
         Set<String> supportedTypes = new LinkedHashSet<>();
-        supportedTypes.add(Styleable.class.getCanonicalName());
+        supportedTypes.add(Style.class.getCanonicalName());
         return supportedTypes;
     }
 

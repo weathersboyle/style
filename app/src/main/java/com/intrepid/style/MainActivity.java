@@ -1,4 +1,4 @@
-package com.intrepid.styleable;
+package com.intrepid.style;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
