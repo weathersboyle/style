@@ -2,13 +2,15 @@ package com.intrepid.style;
 
 import javax.lang.model.element.Element;
 import javax.lang.model.element.ElementKind;
+import javax.lang.model.type.TypeKind;
 
 public class StyleValidator {
-    public static final String VIEW_CLASS_NAME = "android.view.View";
+    public static final String  VIEW_CLASS_NAME = "android.view.View";
 
     public static void validateAnnotatedElement(Element element) throws ProcessingException {
         validateElementKind(element);
-        validateEnclosingElementClassType(element);
+        validateEnclosingElementClassType(element.getEnclosingElement());
+        validateAttrType(element);
     }
 
     /**
@@ -19,8 +21,7 @@ public class StyleValidator {
      */
     public static void validateElementKind(Element element) throws ProcessingException {
         if (element.getKind() != ElementKind.FIELD) {
-            throw new ProcessingException(element, "Only fields can be annotated with @%s",
-                    Style.class.getSimpleName());
+            throw new ProcessingException(element, "Only fields can be annotated with @%s", Style.class.getSimpleName());
         }
     }
 
@@ -32,7 +33,25 @@ public class StyleValidator {
      */
     public static void validateEnclosingElementClassType(Element element) throws ProcessingException {
         if (!TypeUtils.isSubtypeOfType(element.asType(), VIEW_CLASS_NAME)) {
-            throw new ProcessingException(element, "Field must belong to subclass of @%s", VIEW_CLASS_NAME);
+            throw new ProcessingException(element, "%s is not subclass of %s", element.asType().toString(), VIEW_CLASS_NAME);
         }
+    }
+
+    /**
+     * Validates that AttributeType argument to annotation is compatible with declared type of attribute field
+     *
+     * @param element
+     * @throws ProcessingException
+     */
+    public static void validateAttrType(Element element) throws ProcessingException {
+        AttributeType attrType = element.getAnnotation(Style.class).attrType();
+        TypeKind type = TypeUtils.getTypeKind(element);
+        boolean primitiveTypeMatch = type.equals(AttributeType.getTypeMap().get(attrType));
+        boolean classTypeMatch = TypeUtils.isSubtypeOfType(element.asType(), AttributeType.getClassNameMap().get(attrType));
+        if ((attrType == AttributeType.GUESS) || primitiveTypeMatch || classTypeMatch) {
+            return;
+        }
+        throw new ProcessingException(element, "Attribute type %s is not compatible with declared type %s",
+                attrType.toString(), type.toString());
     }
 }

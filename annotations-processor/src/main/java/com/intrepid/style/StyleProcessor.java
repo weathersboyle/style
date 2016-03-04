@@ -75,8 +75,31 @@ public class StyleProcessor extends AbstractProcessor {
     private StyleAttribute createStyleAttribute(Element element) {
         String name = element.getSimpleName().toString();
         TypeKind type = TypeUtils.getTypeKind(element);
-        String defValue = element.getAnnotation(Style.class).defValue();
-        return new StyleAttribute(name, type, defValue);
+        Style style = element.getAnnotation(Style.class);
+        return new StyleAttribute(name, type, getAttrType(style), getDefaultValueString(style, type));
+    }
+
+    private AttributeType getAttrType(Style style) {
+        return style.attrType();
+    }
+
+    private String getDefaultValueString(Style style, TypeKind type) {
+        String value = null;
+        /**
+         * default value only relevant when obtaining value for attribute that has one of the following primitive types
+         */
+        switch (type) {
+            case INT:
+                value = String.valueOf(style.defValueInt());
+                break;
+            case FLOAT:
+                value = String.valueOf(style.defValueFloat());
+                break;
+            case BOOLEAN:
+                value = String.valueOf(style.defValueBool());
+                break;
+        }
+        return value;
     }
 
     private void onError(Element element, String message) {

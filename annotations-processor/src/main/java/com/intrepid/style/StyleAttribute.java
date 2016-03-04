@@ -5,12 +5,14 @@ import javax.lang.model.type.TypeKind;
 public class StyleAttribute {
     private String name;
     private TypeKind type;
-    private String defaultVal;
+    private AttributeType attributeType;
+    private String defValue;
 
-    public StyleAttribute(String name, TypeKind type, String defaultVal) {
+    public StyleAttribute(String name, TypeKind type, AttributeType attributeType, String defValue) {
         this.name = name;
         this.type = type;
-        this.defaultVal = defaultVal;
+        this.attributeType = attributeType;
+        this.defValue = defValue;
     }
 
     public String getName() {
@@ -21,7 +23,11 @@ public class StyleAttribute {
         return type;
     }
 
-    public String getDefaultVal() {
-        return defaultVal;
+    public AttributeType getAttributeType() {
+        return attributeType;
+    }
+
+    public String getDefValue() {
+        return defValue;
     }
 }
