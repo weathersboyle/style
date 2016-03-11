@@ -1,1 +1,1 @@
-include ':app', ':style-api', ':style-processor', ':style'
+include ':app', ':style-annotations', ':style-processor', ':style'

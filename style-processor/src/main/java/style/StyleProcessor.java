@@ -1,4 +1,4 @@
-package com.intrepid.style;
+package style;
 
 import com.google.auto.service.AutoService;
 
@@ -38,7 +38,7 @@ public class StyleProcessor extends AbstractProcessor {
     @Override
     public Set<String> getSupportedAnnotationTypes() {
         Set<String> supportedTypes = new LinkedHashSet<>();
-        supportedTypes.add(Style.class.getCanonicalName());
+        supportedTypes.add(Styleable.class.getCanonicalName());
         return supportedTypes;
     }
 
@@ -61,7 +61,7 @@ public class StyleProcessor extends AbstractProcessor {
     private Map<TypeElement, StyleableViewClass> createStyleableViewClasses(RoundEnvironment roundEnv)
             throws ProcessingException {
         Map<TypeElement, StyleableViewClass> styleablesMap = new LinkedHashMap<>();
-        for (Element annotatedElement : roundEnv.getElementsAnnotatedWith(Style.class)) {
+        for (Element annotatedElement : roundEnv.getElementsAnnotatedWith(Styleable.class)) {
             StyleValidator.validateAnnotatedElement(annotatedElement);
             addAttributeToViewClass(annotatedElement, styleablesMap);
         }
@@ -83,15 +83,15 @@ public class StyleProcessor extends AbstractProcessor {
 
     private StyleAttribute createStyleAttribute(Element element) {
         String name = element.getSimpleName().toString();
-        Style style = element.getAnnotation(Style.class);
-        return new StyleAttribute(name, getAttrType(style), getDefaultValueString(style, element));
+        Styleable styleable = element.getAnnotation(Styleable.class);
+        return new StyleAttribute(name, getAttrType(styleable), getDefaultValueString(styleable, element));
     }
 
-    private AttributeType getAttrType(Style style) {
-        return style.attrType();
+    private AttributeType getAttrType(Styleable styleable) {
+        return styleable.attrType();
     }
 
-    private String getDefaultValueString(Style style, Element element) {
+    private String getDefaultValueString(Styleable styleable, Element element) {
         String value = null;
         TypeKind kind = LangModelUtils.getTypeKind(element);
         /**
@@ -100,22 +100,22 @@ public class StyleProcessor extends AbstractProcessor {
          */
         switch (kind) {
             case INT:
-                value = String.valueOf(style.defValueInt());
+                value = String.valueOf(styleable.defValueInt());
                 break;
             case FLOAT:
-                value = String.valueOf(style.defValueFloat());
+                value = String.valueOf(styleable.defValueFloat());
                 break;
             case BOOLEAN:
-                value = String.valueOf(style.defValueBoolean());
+                value = String.valueOf(styleable.defValueBoolean());
                 break;
             case DECLARED:
                 DeclaredType type = (DeclaredType) element.asType();
                 if (LangModelUtils.isBoxedInt(type)) {
-                    value = String.valueOf(style.defValueInt());
+                    value = String.valueOf(styleable.defValueInt());
                 } else if (LangModelUtils.isBoxedFloat(type)) {
-                    value = String.valueOf(style.defValueFloat());
+                    value = String.valueOf(styleable.defValueFloat());
                 } else if (LangModelUtils.isBoxedBoolean(type)) {
-                    value = String.valueOf(style.defValueBoolean());
+                    value = String.valueOf(styleable.defValueBoolean());
                 }
                 break;
         }

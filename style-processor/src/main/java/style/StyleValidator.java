@@ -1,4 +1,4 @@
-package com.intrepid.style;
+package style;
 
 import javax.lang.model.element.Element;
 import javax.lang.model.element.ElementKind;
@@ -22,7 +22,7 @@ public class StyleValidator {
     public static void validateElementKind(Element element) throws ProcessingException {
         if (element.getKind() != ElementKind.FIELD) {
             throw new ProcessingException(element, "Only fields can be annotated with @%s",
-                    Style.class.getSimpleName());
+                    Styleable.class.getSimpleName());
         }
     }
 
@@ -46,7 +46,7 @@ public class StyleValidator {
      * @throws ProcessingException
      */
     public static void validateAttrType(Element element) throws ProcessingException {
-        AttributeType attrType = element.getAnnotation(Style.class).attrType();
+        AttributeType attrType = element.getAnnotation(Styleable.class).attrType();
         TypeKind kind = LangModelUtils.getTypeKind(element);
         boolean primitiveTypeMatch = (kind == TypedArrayUtils.getCompatibleTypeKind(attrType));
         boolean classTypeMatch = LangModelUtils.isSubtypeOfType(element.asType(),

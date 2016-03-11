@@ -1,4 +1,4 @@
-package com.intrepid.style;
+package style;
 
 public class StyleAttribute {
     private String name;

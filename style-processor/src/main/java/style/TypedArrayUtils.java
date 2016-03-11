@@ -1,10 +1,10 @@
-package com.intrepid.style;
+package style;
 
 import javax.lang.model.type.TypeKind;
 
 public class TypedArrayUtils {
     public static final String STYLEABLE_RES_PREFIX = "R.styleable";
-    public static final String METHOD_OBTAIN_ATTRS = Style.METHOD_OBTAIN_ATTRS;
+    public static final String METHOD_OBTAIN_ATTRS = Styleable.METHOD_OBTAIN_ATTRS;
 
     public static String getPartnerClassName(AttributeType attrType) {
         return AttributeType.getClassNameMap().get(attrType);

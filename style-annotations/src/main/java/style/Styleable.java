@@ -1,4 +1,4 @@
-package com.intrepid.style;
+package style;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
@@ -7,7 +7,7 @@ import java.lang.annotation.Target;
 
 @Target(ElementType.FIELD)
 @Retention(RetentionPolicy.RUNTIME)
-public @interface Style {
+public @interface Styleable {
     String COLOR_STATE_LIST_CLASS_NAME = "android.content.res.ColorStateList";
     String DRAWABLE_CLASS_NAME = "android.graphics.drawable.Drawable";
 

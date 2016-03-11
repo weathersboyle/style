@@ -1,4 +1,4 @@
-package com.intrepid.style;
+package style;
 
 import javax.lang.model.element.Element;
 

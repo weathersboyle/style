@@ -1,4 +1,4 @@
-package com.intrepid.style;
+package style;
 
 import android.content.Context;
 import android.util.AttributeSet;
