@@ -1,6 +1,6 @@
 package style;
 
-import java.util.HashMap;
+import java.util.EnumMap;
 import java.util.Map;
 
 import javax.lang.model.type.TypeKind;
@@ -28,9 +28,9 @@ public enum AttributeType {
     private static Map<AttributeType, String> methodMap;
 
     static {
-        classNameMap = new HashMap<>();
-        typeKindMap = new HashMap<>();
-        methodMap = new HashMap<>();
+        classNameMap = new EnumMap<>(AttributeType.class);
+        typeKindMap = new EnumMap<>(AttributeType.class);
+        methodMap = new EnumMap<>(AttributeType.class);
         for (AttributeType attrType : AttributeType.values()) {
             classNameMap.put(attrType, attrType.getPartnerClassName());
             typeKindMap.put(attrType, attrType.getCompatibleType());
