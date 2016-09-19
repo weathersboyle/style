@@ -3,7 +3,7 @@ package style;
 import javax.lang.model.type.TypeKind;
 
 public class TypedArrayUtils {
-    public static final String STYLEABLE_RES_PREFIX = "R.styleable";
+    public static final String STYLEABLE_RES_PREFIX = "styleable";
     public static final String METHOD_OBTAIN_ATTRS = Constants.METHOD_OBTAIN_ATTRS;
 
     public static String getPartnerClassName(AttributeType attrType) {

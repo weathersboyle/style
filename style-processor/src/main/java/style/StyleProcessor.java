@@ -103,7 +103,7 @@ public class StyleProcessor extends AbstractProcessor {
                 value = String.valueOf(styleable.defValueInt());
                 break;
             case FLOAT:
-                value = String.valueOf(styleable.defValueFloat());
+                value = String.valueOf(styleable.defValueFloat()) + "f";
                 break;
             case BOOLEAN:
                 value = String.valueOf(styleable.defValueBoolean());

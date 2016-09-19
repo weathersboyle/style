@@ -58,6 +58,7 @@ public class StyleableViewClass {
                     .addMethod(createBindStyleAttrsMethod());
             return JavaFile.builder(classPackage, result.build())
                     .addFileComment(FILE_COMMENT)
+                    .addStaticImport(ClassName.get("com.intrepid.style", "R"), "*")
                     .build();
         }
 
@@ -86,7 +87,7 @@ public class StyleableViewClass {
                 String typedArrMethod = TypedArrayUtils.getTypedArrMethodName(attr.getAttributeType());
                 String typedArrIndex = getStyleableResName(attr);
                 String defValue = attr.getDefValue();
-                if (defValue != null && !defValue.isEmpty()) {
+                if (defValue != null && defValue.length() > 0) {
                     result.addStatement("$L.$L = $L.$L($L, $L)", VAR_TARGET, attr.getName(), VAR_TYPED_ARRAY,
                             typedArrMethod, typedArrIndex, defValue);
                 } else {

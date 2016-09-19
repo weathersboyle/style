@@ -10,7 +10,7 @@ import style.Styleable;
 
 public class DemoStyleableView extends FrameLayout {
     @Styleable(attrType = AttributeType.DIMENSION)
-    public int field1;
+    public float field1;
 
     @Styleable(attrType = AttributeType.BOOLEAN, defValueBoolean = true)
     public boolean field2;

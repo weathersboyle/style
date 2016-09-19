@@ -9,7 +9,7 @@ public enum AttributeType {
     BOOLEAN(Boolean.class.getName(), TypeKind.BOOLEAN, Constants.METHOD_GET_BOOLEAN),
     COLOR(Integer.class.getName(), TypeKind.INT, Constants.METHOD_GET_COLOR),
     COLOR_STATE_LIST(Constants.COLOR_STATE_LIST_CLASS_NAME, null, Constants.METHOD_GET_COLOR_STATE_LIST),
-    DIMENSION(Integer.class.getName(), TypeKind.INT, Constants.METHOD_GET_DIMEN),
+    DIMENSION(Float.class.getName(), TypeKind.FLOAT, Constants.METHOD_GET_DIMEN),
     DIMENSION_PIXEL_OFFSET(Integer.class.getName(), TypeKind.INT, Constants.METHOD_GET_DIMEN_PIX_OFFSET),
     DIMENSION_PIXEL_SIZE(Integer.class.getName(), TypeKind.INT, Constants.METHOD_GET_DIMEN_PIX_SIZE),
     DRAWABLE(Constants.DRAWABLE_CLASS_NAME, null, Constants.METHOD_GET_DRAWABLE),
