@@ -3,9 +3,11 @@ package com.intrepid.style.ui;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.widget.FrameLayout;
 
 import style.AttributeType;
+import style.Style;
 import style.Styleable;
 
 public class DemoStyleableView extends FrameLayout {
@@ -23,19 +25,23 @@ public class DemoStyleableView extends FrameLayout {
 
     public DemoStyleableView(Context context) {
         super(context);
+
         init();
     }
 
     public DemoStyleableView(Context context, AttributeSet attrs) {
         super(context, attrs);
+
         initWithAttrs(attrs);
     }
 
     private void initWithAttrs(AttributeSet attrs) {
+        Style.bind(this, attrs);
+
         init();
     }
 
     private void init() {
-
+        Log.d("styleable", "initing");
     }
 }

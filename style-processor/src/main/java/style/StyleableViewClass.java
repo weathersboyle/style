@@ -13,12 +13,10 @@ import javax.lang.model.element.Modifier;
 
 public class StyleableViewClass {
     private static final String STYLEABLE_CLASS_SUFFIX = "$$Styleable";
-    private static final String BINDING_METHOD_NAME = "style";
-    private static final String VAR_CONTEXT = "context";
+    private static final String BINDING_METHOD_NAME = "bind";
     private static final String VAR_ATTR_SET = "attrs";
     private static final String VAR_TARGET = "target";
     private static final String VAR_TYPED_ARRAY = "typedArray";
-    private static final ClassName CONTEXT = ClassName.get("android.content", "Context");
     private static final ClassName ATTRIBUTE_SET = ClassName.get("android.util", "AttributeSet");
     private static final ClassName TYPED_ARRAY = ClassName.get("android.content.res", "TypedArray");
     private static final ClassName STYLEABLE_VIEW_BINDER = ClassName.get("style", "StyleableViewBinder");
@@ -66,7 +64,7 @@ public class StyleableViewClass {
             MethodSpec.Builder result = MethodSpec.methodBuilder(BINDING_METHOD_NAME)
                     .addModifiers(Modifier.PUBLIC);
             addBindMethodParams(result);
-            result.addStatement("$T $L = $L.$L($L, $L)", TYPED_ARRAY, VAR_TYPED_ARRAY, VAR_CONTEXT,
+            result.addStatement("$T $L = $L.$L.$L($L, $L)", TYPED_ARRAY, VAR_TYPED_ARRAY, VAR_TARGET, "getContext()",
                     TypedArrayUtils.METHOD_OBTAIN_ATTRS, VAR_ATTR_SET, getStyleableResName(null))
                     .beginControlFlow("try");
             addBindMethodBindings(result);
@@ -77,9 +75,8 @@ public class StyleableViewClass {
         }
 
         private void addBindMethodParams(MethodSpec.Builder result) {
-            result.addParameter(CONTEXT, VAR_CONTEXT, Modifier.FINAL)
-                    .addParameter(ATTRIBUTE_SET, VAR_ATTR_SET, Modifier.FINAL)
-                    .addParameter(ClassName.get(classPackage, simpleName), VAR_TARGET, Modifier.FINAL);
+            result.addParameter(ClassName.get(classPackage, simpleName), VAR_TARGET, Modifier.FINAL)
+                    .addParameter(ATTRIBUTE_SET, VAR_ATTR_SET, Modifier.FINAL);
         }
 
         private void addBindMethodBindings(MethodSpec.Builder result) {

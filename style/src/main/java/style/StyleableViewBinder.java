@@ -1,8 +1,8 @@
 package style;
 
-import android.content.Context;
 import android.util.AttributeSet;
+import android.view.View;
 
-public interface StyleableViewBinder<T> {
-    void style(Context context, AttributeSet attrs, T target);
+public interface StyleableViewBinder<T extends View> {
+    void bind(T target, AttributeSet attrs);
 }
