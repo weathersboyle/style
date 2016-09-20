@@ -1,8 +1,8 @@
 <resources>
     <declare-styleable name="DemoStyleableView">
-        <attr name="width" format="dimension" />
+        <attr name="radius" format="dimension" />
         <attr name="fillIn" format="boolean" />
-        <attr name="backgroundDrawable" format="reference" />
+        <attr name="backgroundColor" format="color" />
         <attr name="quantity" format="integer" />
     </declare-styleable>
 </resources>

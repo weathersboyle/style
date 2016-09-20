@@ -13,11 +13,10 @@
     >
 
     <com.intrepid.style.ui.DemoStyleableView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:backgroundDrawable="@android:drawable/arrow_down_float"
-        app:fillIn="false"
-        app:quantity="2"
-        app:width="5.5dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:backgroundColor="@android:color/holo_green_dark"
+        app:fillIn="true"
+        app:radius="16dp"
         />
 </RelativeLayout>
